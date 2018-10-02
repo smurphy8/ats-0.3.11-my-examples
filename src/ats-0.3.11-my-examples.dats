@@ -1,6 +1,7 @@
 
 #include "./expressions_and_values.dats"
-
+#include "./names_and_bindings.dats"
+#include "./scopes_for_bindings.dats"
 
 
 val _ = println!("Hello, World!")

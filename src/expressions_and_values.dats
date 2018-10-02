@@ -1,7 +1,7 @@
 
 // Notice, this staload does have to be here or nothing works 
 // I rediscover this every time!
-
+// Things like the `~` sign havet o be here 
 #include
 "share/atspre_staload.hats"
 
@@ -23,3 +23,6 @@ val falseBool : bool = false
 val trueBool : bool = true
 
 // Char & String
+
+val charLiteral : char = 'a'
+val stringLiteral : string = "Here is a test"
