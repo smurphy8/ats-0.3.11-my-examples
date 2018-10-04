@@ -3,6 +3,7 @@
 #include "./names_and_bindings.dats"
 #include "./scopes_for_bindings.dats"
 #include "./primitive_types.dats"
+#include "./tuples_and_types.dats"
 
 val _ = println!("Hello, World!")
 implement main0 () = ()
