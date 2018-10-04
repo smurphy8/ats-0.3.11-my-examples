@@ -13,4 +13,12 @@ val rslt = let val x = 0
                   ~x) 
            end
            
-           
+
+
+// void tuple           
+
+val rslt' = let val x = 0
+            in ( if (x >= 0)
+                 then 
+                   print("void condition"))
+            end  

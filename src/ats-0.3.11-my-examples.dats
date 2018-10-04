@@ -6,6 +6,6 @@
 #include "./tuple_types.dats"
 #include "./record_types.dats"
 #include "./conditional_expressions.dats"
-
+#include "./sequence_expressions.dats"
 val _ = println!("Hello, World!")
 implement main0 () = ()
