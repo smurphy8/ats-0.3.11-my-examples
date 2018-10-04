@@ -9,7 +9,7 @@
 "share/atspre_staload.hats"
 
 
-// Flat (Unboxed) Tuples are the default!
+// Unboxed Tuples are the default!
 // Construction
 val xyz : (char, int, double)  = ('A', 1, 2.0)
 
@@ -19,3 +19,14 @@ val x : char = xyz.0 and y : int  = xyz.1 and z : double = xyz.2
 // Pattern matching
 val (x':char,y',z'): (char, int, double) = xyz
 
+
+//Boxed Tuples (size of a pointer)
+
+// The type of a Boxed tuple matches its construction (with the single quote)
+val anotherXYZ : '(char,int,double) = '('A',1,2.0)
+
+// access mimic 
+val xBoxed = anotherXYZ.0
+
+// pattern matches type and construction (with the single quote)
+val '(xB,yB,zB) = anotherXYZ
