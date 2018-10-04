@@ -4,6 +4,8 @@
 #include "./scopes_for_bindings.dats"
 #include "./primitive_types.dats"
 #include "./tuple_types.dats"
+#include "./record_types.dats"
+
 
 val _ = println!("Hello, World!")
 implement main0 () = ()
