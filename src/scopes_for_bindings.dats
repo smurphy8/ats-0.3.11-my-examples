@@ -18,3 +18,19 @@ val areaWhere =
   PI * radius * radius where {
   val PI = 3.14159 and radius = 10.0
   }
+  
+// Local bindings 
+// The difference between let and local should be clear: 
+// The former is used to form an expression while the latter is used to introduce a sequence of declarations. 
+
+local 
+
+val PI = 3.14159 and radius = 10.0 
+
+in
+
+val areaLocal = PI * radius * radius
+
+end
+
+  
