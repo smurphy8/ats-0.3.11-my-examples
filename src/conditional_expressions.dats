@@ -20,5 +20,5 @@ val rslt = let val x = 0
 val rslt' = let val x = 0
             in ( if (x >= 0)
                  then 
-                   print("void condition"))
+                   print("if condition with no else "))
             end  
