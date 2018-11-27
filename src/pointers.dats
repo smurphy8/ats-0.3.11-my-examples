@@ -1,3 +1,4 @@
+
 (*
 
 From Blog Post:
@@ -13,6 +14,12 @@ the basics of pointer handling in ATS and how this safety is achieved.
 
 *)
 #include "share/atspre_staload.hats"
+
+staload UN  = "prelude/SATS/unsafe.sats"
+staload _  = "prelude/DATS/unsafe.dats"
+
+// You can use unsafe functions to dereference the pointer 
+//to retrieve and store data at that location:
 
 
 (*
@@ -35,8 +42,22 @@ The following example shows some basic usage:
 extern fun malloc (s: size_t): ptr = "mac#malloc"
 extern fun free (p:ptr) : void = "mac#free"
 
-val v = let 
+val firstMalloc = let 
   val a = malloc(g0int2uint_int_size(3));
-  val _ = print(a);
+//  val _ = print(a);
   in  free(a)
   end
+  
+
+
+
+val mallocWithSet = let 
+  val a = malloc(g0int2uint_int_size(3)); 
+in
+  $UN.ptr0_set<int> (a,10);
+  print_newline();
+  print($UN.ptr0_get<int>(a));
+  print_newline();  
+  free(a);
+end
+  
