@@ -9,6 +9,8 @@
 #include "./sequence_expressions.dats"
 #include "./functions.dats"
 #include "./dependent_types.dats"
+#include "./pointers.dats"
+#include "./views_and_viewtypes.dats"
 
 val _ = println!("Hello, World!")
 implement main0 () = ()
