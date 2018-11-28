@@ -11,6 +11,7 @@
 #include "./dependent_types.dats"
 #include "./pointers.dats"
 #include "./views_and_viewtypes.dats"
+#include "./sorts.dats"
 
 val _ = println!("Hello, World!")
 implement main0 () = ()
