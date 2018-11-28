@@ -1,6 +1,7 @@
 #include 
 "share/atspre_staload.hats"
-
+staload UN = "prelude/SATS/unsafe.sats"
+staload "prelude/SATS/string.sats"
 (*
 
 Enhanced Expressiveness for Specification
@@ -73,3 +74,49 @@ typedef Nat = [a:int | a > 0] int(a)
 typedef Nat = [a:nat] int(a)
 
 *)
+
+(*
+Constraint-Solving during Typechecking
+
+Typechecking in ATS involves generating and solving constraints. 
+As an example, the code below implements the well-known factorial function:
+
+*)
+
+
+(*
+
+WHY FACT WON'T WORK LIKE THIS
+
++ For each natural number n, n > 0 implies n - 1 >= 0
++ For each natural number n and each natural number r1, n > 0 implies n * r1>= 0
++ For each natural number n, 1 >= 0 holds. 
+
+fun
+fact{n:nat} ( x: int(n) ) : [r:nat] int(r) =
+  if x > 0 then x * fact (x-1) else 1
+
+*)
+
+
+
+// String Processing Example:
+typedef String = [n:nat] string(n)
+
+(* This is a very useful illustration of how 
+to cast and manipulate some of the proof terms.
+
+
+*)
+fun stringIsAtEnd  
+   {n:int} {i:nat | i < n} 
+   (str: string(n), i: size_t (i)): bool (i==n) = let    
+   val pointerToBeginningOfString = string2ptr(str)
+   val offsetBy_i = add_ptr_bsz(pointerToBeginningOfString, i)
+   val string_term_null = '\000'
+   in $UN.cast{bool(n==i)}($UN.ptr1_get<char>(offsetBy_i) = 
+      string_term_null)
+end
+   
+   
+val test = stringIsAtEnd("here", g1int2uint(3))

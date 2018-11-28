@@ -87,7 +87,6 @@ Sorts I have found in prelude...
 
 *)
 
-
 staload "contrib/atscntrb/atscntrb-hx-mytesting/SATS/randgen.sats"  
 staload "libats/libc/SATS/stdio.sats"                               
 staload "libats/ML/SATS/matrix0.sats"                               
@@ -156,6 +155,19 @@ staload "prelude/SATS/string.sats"
 staload "prelude/SATS/stream_vt.sats"                               
 staload "prelude/SATS/integer.sats"                                 
 staload "prelude/SATS/reference.sats"
+(*
+
+
+ssssssssss
+s        s
+s SORTS  s
+s        s
+ssssssssss
+
+*)
+
+
+
 
 
 sortdef ex0 = t0p
@@ -188,3 +200,5 @@ sortdef ex26 = alez
 sortdef ex27 = addr
 sortdef ex28 = viewt@ype
 sortdef ex29 = tkind
+sortdef ex30 = int
+sortdef ex31 = bool
