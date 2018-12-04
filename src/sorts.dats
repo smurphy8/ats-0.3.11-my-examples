@@ -1,7 +1,7 @@
 (* 
 List of sorts 
 
-
+https://github.com/githwxi/ATS-Postiats/wiki/sort
 *)
 
 #include "share/atspre_staload.hats"
@@ -9,6 +9,8 @@ List of sorts
 
 
 (* 
+
+
 
 Sorts I have found in prelude...
 
