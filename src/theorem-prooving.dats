@@ -58,3 +58,24 @@ in
 end // end of [mul_istot]  
 
 
+datatype bit_status =
+  | set of () | unset of ()
+
+sortdef bit = {n:nat | n <2}
+
+dataprop IsSet(int) = 
+  |IsSetZero (0) of ()
+  |IsSetOne  (1)  of ()
+
+
+sortdef bit = {b:int| b <2 && b >= 0}
+typedef Bit = [b:bit] int(b)
+
+
+
+
+fun writeThing{i:int| i == 0} (b0:int(i)) = 
+  print("help")
+
+val _ = writeThing(0)  
+  
