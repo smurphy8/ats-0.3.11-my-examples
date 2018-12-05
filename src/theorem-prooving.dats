@@ -86,7 +86,7 @@ fn setBitVector (i:int) : void
 
 
 // extern
-fn getBitVectorStatus {i,j:int} {b:bool} (bv:int(j)) : [b:bool] (IsWriteable(i,j,b)|bool(b)) = 
+fn getBitVectorStatus {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteable(i,j,b)|bool(b)) = 
   if bv > 3 then   
   (Writeable() | true)
   else
@@ -94,17 +94,12 @@ fn getBitVectorStatus {i,j:int} {b:bool} (bv:int(j)) : [b:bool] (IsWriteable(i,j
 
  
 //extern
-prfn nonPermanentSetCheck {i:int} {j:int} {w:bool} (pf: IsWriteable(i,j,w)) : void = 
-  case pf of 
-    | Writeable () => ()
-    | NotWriteable () => ()
 
-
-fn setBitVectorWithProof {i:int} {j:int} {w:bool} (b:int(i)) : void  = 
-  let 
-  val (pf|total) = getBitVectorStatus(b) in
-   ()
-  end
+(* fn setBitVectorWithProof {i:int} {w:bool} (b:int(i)) : void  =  *)
+(*   let  *)
+(*   val (pf:IsWriteable(i,i,w)|total) = getBitVectorStatus{i}(b) in *)
+(*    () *)
+(*   end *)
 
 
 
