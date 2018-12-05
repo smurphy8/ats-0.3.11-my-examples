@@ -95,13 +95,14 @@ fn getBitVectorStatus {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteable(i,j,b)|bool
  
 //extern
 
-(* fn setBitVectorWithProof {i:int} {w:bool} (b:int(i)) : void  =  *)
-(*   let  *)
-(*   val (pf:IsWriteable(i,i,w)|total) = getBitVectorStatus{i}(b) in *)
-(*    () *)
-(*   end *)
-
-
+fn setBitVectorWithProof {i:int} {w:bool} (pf:IsWriteable(i,i,w) | b:int(i)) : [t:bool | t== true] (IsWriteable(i,i,t) | void)  = 
+   sif w == true then
+     (pf|())
+   else
+     let val _ = setBitVector(b);
+     in
+     (Writeable() | ())
+     end
 
 
 
