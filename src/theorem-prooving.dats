@@ -63,17 +63,34 @@ datatype bit_status =
 
 sortdef bit = {n:nat | n <2}
 
+
+
 dataprop IsSet(int) = 
   |IsSet(1) of ()
 //  |IsSetOne  (1)  of IsSet(i)
 
 
-
+dataprop IsWriteable(int,bool) = 
+  | {i:int} IsWriteable(i,true) of ()
+//  | {i:int} NotWriteable(i,false) of ()
+//  | {i:int} {t:int} IsWriteable(i,t,false) of () 
 
 sortdef bit = {b:int| b <2 && b >= 0}
 typedef Bit = [b:bit] int(b)
 
 
+typedef twoBitVector = @(bool,bool)
+
+extern  
+fn setBitVector (i:int) : void
+
+
+// extern
+fn setBitVectorWithProof {i:int} {a:int}  (b0:int(i)) : (IsWriteable(i,true)|void)  = 
+   (IsWriteable() | ())
+
+
+ 
 
 // extern
 fun writeThing {i:int|i==1 }  (b0:int(i)): (IsSet(i) | void) = case+ b0 of
