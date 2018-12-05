@@ -64,8 +64,10 @@ datatype bit_status =
 sortdef bit = {n:nat | n <2}
 
 dataprop IsSet(int) = 
-  |IsSetZero (0) of ()
-  |IsSetOne  (1)  of ()
+  |IsSet(1) of ()
+//  |IsSetOne  (1)  of IsSet(i)
+
+
 
 
 sortdef bit = {b:int| b <2 && b >= 0}
@@ -73,9 +75,12 @@ typedef Bit = [b:bit] int(b)
 
 
 
+// extern
+fun writeThing {i:int|i==1 }  (b0:int(i)): (IsSet(i) | void) = case+ b0 of
+ | 1 => (IsSet()|())
+ 
 
-fun writeThing{i:int| i == 0} (b0:int(i)) = 
-  print("help")
+  
 
-val _ = writeThing(0)  
+// val _ = writeThing(0)  
   
