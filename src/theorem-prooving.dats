@@ -70,9 +70,9 @@ dataprop IsSet(int) =
 //  |IsSetOne  (1)  of IsSet(i)
 
 
-dataprop IsWriteable(int,bool) = 
-  | {i:int} IsWriteable(i,true) of ()
-//  | {i:int} NotWriteable(i,false) of ()
+dataprop IsWriteable(int,int,bool) = 
+  | {i,j:int} Writeable(i,j,true) of ()
+  | {i,j:int} NotWriteable(i,j,false) of ()
 //  | {i:int} {t:int} IsWriteable(i,t,false) of () 
 
 sortdef bit = {b:int| b <2 && b >= 0}
@@ -86,8 +86,29 @@ fn setBitVector (i:int) : void
 
 
 // extern
-fn setBitVectorWithProof {i:int} {a:int}  (b0:int(i)) : (IsWriteable(i,true)|void)  = 
-   (IsWriteable() | ())
+fn getBitVectorStatus {i,j:int} {b:bool} (bv:int(j)) : [b:bool] (IsWriteable(i,j,b)|bool(b)) = 
+  if bv > 3 then   
+  (Writeable() | true)
+  else
+  (NotWriteable() | false)
+
+ 
+//extern
+prfn nonPermanentSetCheck {i:int} {j:int} {w:bool} (pf: IsWriteable(i,j,w)) : void = 
+  case pf of 
+    | Writeable () => ()
+    | NotWriteable () => ()
+
+
+fn setBitVectorWithProof {i:int} {j:int} {w:bool} (b:int(i)) : void  = 
+  let 
+  val (pf|total) = getBitVectorStatus(b) in
+   ()
+  end
+
+
+
+
 
 
  
