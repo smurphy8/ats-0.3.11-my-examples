@@ -58,6 +58,25 @@ in
 end // end of [mul_istot]  
 
 
+(*  
+--------------------------------------------------
+Data Direction Mockup stuff
+--------------------------------------------------
+
+Below are functions mimicing the proof terms needed 
+for a data direction register 
+
+a data direction registers says whether something is writeable or not
+by assigning a 1 or a zero to a value then that value corresponds to a port
+that can then be read or written to.
+
+For instance to write to PortB pin 0 
+isSet(0,DDRB) Should be true
+ 
+*)
+
+
+
 datatype bit_status =
   | set of () | unset of ()
 
@@ -73,7 +92,6 @@ dataprop IsSet(int) =
 dataprop IsWriteable(int,int,bool) = 
   | {i,j:int} Writeable(i,j,true) of ()
   | {i,j:int} NotWriteable(i,j,false) of ()
-//  | {i:int} {t:int} IsWriteable(i,t,false) of () 
 
 sortdef bit = {b:int| b <2 && b >= 0}
 typedef Bit = [b:bit] int(b)
@@ -81,25 +99,30 @@ typedef Bit = [b:bit] int(b)
 
 typedef twoBitVector = @(bool,bool)
 
-extern  
-fn setBitVector (i:int) : void
+
+// Dummy Set bit vector function as an example
+// extern  
+// fn setBitVector (i:int) : void
 
 
-// extern
-fn getBitVectorStatus {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteable(i,j,b)|bool(b)) = 
+
+fn getBitVector {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteable(i,j,b)|bool(b)) = 
   if bv > 3 then   
   (Writeable() | true)
   else
   (NotWriteable() | false)
 
  
-//extern
-
-fn setBitVectorWithProof {i:int} {w:bool} (pf:IsWriteable(i,i,w) | b:int(i)) : [t:bool | t== true] (IsWriteable(i,i,t) | void)  = 
+(* This function contains a lot of important ideas
+   First, you can use sif to directly manipulate a static term (w in this case)
+   Also, there is a proof term we wrote by hand (IsWriteable)
+*)
+fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteable(i,j,w) | b:int(i)) : 
+   [t:bool | t== true] (IsWriteable(i,j,t) | void)  = 
    sif w == true then
      (pf|())
    else
-     let val _ = setBitVector(b);
+     let val _ = () // setBitVector(b);
      in
      (Writeable() | ())
      end
