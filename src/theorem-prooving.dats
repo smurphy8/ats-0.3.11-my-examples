@@ -85,9 +85,6 @@ sortdef bit = {n:nat | n <2}
 
 
 
-dataprop IsSet(int) = 
-  |IsSet(1) of ()
-//  |IsSetOne  (1)  of IsSet(i)
 
 
 dataprop IsWriteable(int,int,bool) = 
@@ -133,10 +130,6 @@ fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteable(i,j,w) | b:int(i)) :
 
  
 
-// extern
-fun writeThing {i:int|i==1 }  (pf:IsWriteable(i,i,true)| b0:int(i)): (IsSet(i) | void)  = case+ b0 of
- | 1 => (IsSet()|())
- 
 
   
 
@@ -147,3 +140,8 @@ val _ = let
          in ()
          end
   
+
+
+
+
+
