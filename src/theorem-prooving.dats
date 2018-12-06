@@ -91,6 +91,8 @@ dataprop IsWriteable(int,int,bool) =
   | {i,j:int} Writeable(i,j,true) of ()
   | {i,j:int} NotWriteable(i,j,false) of ()
 
+
+
 sortdef bit = {b:int| b <2 && b >= 0}
 typedef Bit = [b:bit] int(b)
 
@@ -115,12 +117,12 @@ fn getBitVectorDummy {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteable(i,j,b) | boo
    First, you can use sif to directly manipulate a static term (w in this case)
    Also, there is a proof term we wrote by hand (IsWriteable)
 *)
-fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteable(i,j,w) | b:int(i)) : 
+fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteable(i,j,w) | b:int(j)) : 
    [t:bool | t== true] (IsWriteable(i,j,t) | void)  = 
    if b > 3 then
      (Writeable() |())
    else
-     let val _ = () // setBitVector(b);
+     let val b = () // setBitVector(b);
      in
      (Writeable() | ())
      end
@@ -128,17 +130,17 @@ fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteable(i,j,w) | b:int(i)) :
 
 
 
- 
-
+fn writeBitVectorWithProof {i,j:int} (pf:IsWriteable(i,j,true) | b:int(j)) : void =  ()
+  
 
   
 
 val _ = let 
             val i         = 2
-            val (pf | _)  = getBitVectorDummy(i) 
-            val _ = setBitVectorWithProof(pf|2)
-         in ()
-         end
+            val (pf  | _) = getBitVectorDummy(i) 
+            val (pfW | _) = setBitVectorWithProof(pf|i)            
+        in writeBitVectorWithProof(pfW|i)
+        end
   
 
 
