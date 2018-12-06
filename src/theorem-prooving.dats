@@ -34,6 +34,7 @@ case+ xss of
   
   
 (*
+
 Given a list xss of the type list(list(T,n),m), list_concat(xss) now returns a pair (pf | res) 
 such that pf is a proof of the prop-type MUL(m,n,p) for some natural number p and res is a list 
 of the type list(T,p), where the symbol bar (|) is used to separate proofs from values. 
@@ -105,8 +106,8 @@ typedef twoBitVector = @(bool,bool)
 // fn setBitVector (i:int) : void
 
 
-
-fn getBitVector {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteable(i,j,b)|bool(b)) = 
+(* Dummy bit vector function *) 
+fn getBitVectorDummy {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteable(i,j,b) | bool(b)) = 
   if bv > 3 then   
   (Writeable() | true)
   else
@@ -119,8 +120,8 @@ fn getBitVector {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteable(i,j,b)|bool(b)) =
 *)
 fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteable(i,j,w) | b:int(i)) : 
    [t:bool | t== true] (IsWriteable(i,j,t) | void)  = 
-   sif w == true then
-     (pf|())
+   if b > 3 then
+     (Writeable() |())
    else
      let val _ = () // setBitVector(b);
      in
@@ -133,11 +134,16 @@ fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteable(i,j,w) | b:int(i)) :
  
 
 // extern
-fun writeThing {i:int|i==1 }  (b0:int(i)): (IsSet(i) | void) = case+ b0 of
+fun writeThing {i:int|i==1 }  (pf:IsWriteable(i,i,true)| b0:int(i)): (IsSet(i) | void)  = case+ b0 of
  | 1 => (IsSet()|())
  
 
   
 
-// val _ = writeThing(0)  
+val _ = let 
+            val i         = 2
+            val (pf | _)  = getBitVectorDummy(i) 
+            val _ = setBitVectorWithProof(pf|2)
+         in ()
+         end
   
