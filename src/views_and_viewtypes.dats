@@ -14,6 +14,8 @@
  *)
  
 #include "share/atspre_staload.hats"
+staload UN  = "prelude/SATS/unsafe.sats"
+staload _  = "prelude/DATS/unsafe.dats"
 
 
 (*
@@ -32,3 +34,19 @@ often referred to as at-views.
 
 *)
 
+
+
+
+
+(* From Bluish coders examples on pointers in ATS 
+   Super helpful!
+*)
+extern fun malloc (s: sizeof_t int): [l:agz] (int @ l | ptr l) = "mac#malloc"
+extern fun free {l:agz} (pf: int @ l | p: ptr l): void = "mac#free"
+
+
+//TODO Implement this function
+extern
+fun{a:t@ype}
+ptr_get0 {l:addr} (pf: a @ l | p: ptr l): (a @ l | a) // = (pf| !p)
+  

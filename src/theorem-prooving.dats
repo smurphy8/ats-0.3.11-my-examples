@@ -93,6 +93,7 @@ dataprop IsWriteable(int,int,bool) =
 
 
 
+
 sortdef bit = {b:int| b <2 && b >= 0}
 typedef Bit = [b:bit] int(b)
 
@@ -129,7 +130,7 @@ fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteable(i,j,w) | b:int(j)) :
 
 
 
-
+(* Obviously this isn't really doing anything *)
 fn writeBitVectorWithProof {i,j:int} (pf:IsWriteable(i,j,true) | b:int(j)) : void =  ()
   
 
