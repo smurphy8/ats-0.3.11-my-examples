@@ -60,10 +60,15 @@ ptr_get0 {l:addr} (pf: a @ l | p: ptr l): (a @ l | a) =
     let val a = !p in (pf|a) end
 
 
-// TODO Finish implementing this    
-extern
+(*
+Again, the actual actions have to come before reference to the pointers!
+So weird
+*)
 fun {a:t@ype} 
-ptr_set0 {l:addr} (pf: a? @ l |p:ptr l, x:a) : (a@l | void) 
+ptr_set0 {l:addr} (pf: a? @ l |p:ptr l , x:a) : (a@l | void) = let 
+  val () = !p := x
+  in (pf|())
+  end
 
 fun {a:t@ype}
 ptr_get1 {l:addr} (pf : !a@l >> a@l | p : ptr l): a = !p 
