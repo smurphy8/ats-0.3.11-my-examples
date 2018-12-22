@@ -65,7 +65,7 @@ Again, the actual actions have to come before reference to the pointers!
 So weird
 *)
 fun {a:t@ype} 
-ptr_set0 {l:addr} (pf: a? @ l |p:ptr l , x:a) : (a@l | void) = let 
+ptr_set0 {l:addr} (pf: a? @ l |p:ptr(l) , x:a) : (a@l | void) = let 
   val () = !p := x
   in (pf|())
   end
@@ -83,9 +83,9 @@ ptr_swap0 {l1,l2 : addr} ( pf1: a@l1   , pf2:a@l2
                          ( a@l1, a@l2 | void) = let
   val (pf2'| tmp2) = ptr_get0(pf2|p2)
   val (pf1'| tmp1) = ptr_get0(pf1|p1)
-  val (pf1''| ()) = ptr_set0(pf1'|p1,tmp2)
-  val (pf2''| ()) = ptr_set0(pf2'|p2,tmp1)
-  in (pf1'',pf2'' | ())
+  val (pf1_fin| ()) = ptr_set0(pf1'|p1,tmp2)
+  val (pf2_fin| ()) = ptr_set0(pf2'|p2,tmp1)
+  in  (pf1_fin,pf2_fin|())
   end
                           
 
