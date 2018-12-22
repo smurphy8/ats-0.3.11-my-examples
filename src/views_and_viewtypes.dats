@@ -117,24 +117,17 @@ viewtypes as combinations of views and types.
 a VT is a view combined with a type VT == (V | T)
 *)
 
-// vtypedef tptr (a:t@ype, l:addr) = (a @ l | ptr l)
+vtypedef tptr (a:t@ype, l:addr) = (a @ l | ptr l)
 
-// TODO increment getInc a function to increase
+
 // a counter from a pointer
-// 
-// extern
-(* fn getInc {l:addr} {n:nat} (counter: !tptr(int(n),l)  >> tptr(int(n+1),l)):int(n) =  *)
-(*   let *)
-(*    val n = ptr_get1<int(n)> (counter.0|counter.1) *)
-(*    val () = ptr_set1<int(n+1)>(counter.0|counter.1,n+1) *)
-(*   in n end *)
+// This function is interesting because it combines proofs on
+// types (refinement) with linear proofs (view type) 
+fn getInc {l:addr} {n:nat} (counter: !tptr(int(n),l)  >> tptr(int(n+1),l)):int(n) =
+  let
+   val n = ptr_get1<int(n)> (counter.0|counter.1)
+   val () = ptr_set1<int(n+1)>(counter.0|counter.1,n+1)
+  in n end
+
+
   
-(* fn getinc *)
-(*   {l:addr}{n:nat} *)
-(* ( *)
-(*   cnt: !tptr (int(0), l) >> tptr (int(0+1), l) *)
-(* ) : int(1) = n where { *)
-(*   val n = ptr_get1<int(0)> (cnt.0 | cnt.1) *)
-(*   val () = ptr_set1<int(0+1)> (cnt.0 | cnt.1, n+1) *)
-(* } (\* end of [getinc] *\)   *)
-   
