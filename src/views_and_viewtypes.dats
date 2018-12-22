@@ -71,12 +71,25 @@ ptr_set0 {l:addr} (pf: a? @ l |p:ptr l , x:a) : (a@l | void) = let
   end
 
 
-// TODO implement swap0
-extern
+(* 
+
+The proofs mean you need an extra placeholder
+but that is because you don't have a requirement that the get proof is not consumed
+*)
+
 fun {a:t@ype} 
 ptr_swap0 {l1,l2 : addr} ( pf1: a@l1   , pf2:a@l2
                          | p1: ptr(l1) , p2:ptr(l2)) : 
-                         ( a@l1, a@l2 | void)                             
+                         ( a@l1, a@l2 | void) = let
+  val (pf2'| tmp2) = ptr_get0(pf2|p2)
+  val (pf1'| tmp1) = ptr_get0(pf1|p1)
+  val (pf1''| ()) = ptr_set0(pf1'|p1,tmp2)
+  val (pf2''| ()) = ptr_set0(pf2'|p2,tmp1)
+  in (pf1'',pf2'' | ())
+  end
+                          
+
+                         
 
 
 fun {a:t@ype}
