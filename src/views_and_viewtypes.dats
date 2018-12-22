@@ -63,7 +63,7 @@ ptr_get0 {l:addr} (pf: a @ l | p: ptr l): (a @ l | a) =
 // TODO Finish implementing this    
 extern
 fun {a:t@ype} 
-ptr_set0 {l:addr} (pf: a? @ l |p:ptr l) : (a@l | void)
+ptr_set0 {l:addr} (pf: a? @ l |p:ptr l, x:a) : (a@l | void) 
 
 fun {a:t@ype}
 ptr_get1 {l:addr} (pf : !a@l >> a@l | p : ptr l): a = !p 
