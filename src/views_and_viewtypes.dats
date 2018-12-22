@@ -92,5 +92,49 @@ ptr_swap0 {l1,l2 : addr} ( pf1: a@l1   , pf2:a@l2
                          
 // TODO implement swap 1
 
+// get1 first
+// demonstrating use of >> operator which says a proof is transformed
+// but not consumed (i think)
 fun {a:t@ype}
 ptr_get1 {l:addr} (pf : !a@l >> a@l | p : ptr l): a = !p 
+
+
+// get1_alt and get1 implement same thing
+fun {a:t@ype}
+ptr_get1_alt {l:addr} (pf: !a@l|p:ptr(l)):a = !p
+
+
+fun {a:t@ype} 
+ptr_set1 {l:addr} (pf : !a? @ l >> a@l | p : ptr l ,x:a) :void = let
+  val () = !p := x
+  in () end
+
+
+
+(*
+viewtypes as combinations of views and types.
+
+a VT is a view combined with a type VT == (V | T)
+*)
+
+// vtypedef tptr (a:t@ype, l:addr) = (a @ l | ptr l)
+
+// TODO increment getInc a function to increase
+// a counter from a pointer
+// 
+// extern
+(* fn getInc {l:addr} {n:nat} (counter: !tptr(int(n),l)  >> tptr(int(n+1),l)):int(n) =  *)
+(*   let *)
+(*    val n = ptr_get1<int(n)> (counter.0|counter.1) *)
+(*    val () = ptr_set1<int(n+1)>(counter.0|counter.1,n+1) *)
+(*   in n end *)
+  
+(* fn getinc *)
+(*   {l:addr}{n:nat} *)
+(* ( *)
+(*   cnt: !tptr (int(0), l) >> tptr (int(0+1), l) *)
+(* ) : int(1) = n where { *)
+(*   val n = ptr_get1<int(0)> (cnt.0 | cnt.1) *)
+(*   val () = ptr_set1<int(0+1)> (cnt.0 | cnt.1, n+1) *)
+(* } (\* end of [getinc] *\)   *)
+   
