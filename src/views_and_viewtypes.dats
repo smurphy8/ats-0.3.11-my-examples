@@ -45,8 +45,25 @@ extern fun malloc (s: sizeof_t int): [l:agz] (int @ l | ptr l) = "mac#malloc"
 extern fun free {l:agz} (pf: int @ l | p: ptr l): void = "mac#free"
 
 
-//TODO Implement this function
-extern
+
+(*
+
+This function has to be written with the let signature because the types are evaluated from left to right:
+
+
+When constructing (pf | !p), 'pf' is held by the type checker and then !p could no longer find the view it needs
+in order to fetch the data. So the data needs to be fetched first: let val x = !p in (pf | x)
+
+*)
 fun{a:t@ype}
-ptr_get0 {l:addr} (pf: a @ l | p: ptr l): (a @ l | a) // = (pf| !p)
-  
+ptr_get0 {l:addr} (pf: a @ l | p: ptr l): (a @ l | a) = 
+    let val a = !p in (pf|a) end
+
+
+// TODO Finish implementing this    
+//extern
+//fun {a:t@ype} 
+//ptr_set0 {l:addr} (pf: a? @ l |p:ptrl) : (a@l | void)
+
+fun {a:t@ype}
+ptr_get1 {l:addr} (pf : !a@l >> a@l | p : ptr l): a = !p 
