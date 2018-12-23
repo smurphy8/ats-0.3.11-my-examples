@@ -139,6 +139,11 @@ Then store it all in a pointer p.
 This is an implmentation of a pointer to a closure.
 thus cloptr = closure-pointer
 
+In the implementation, env is passed as reference.
+Interestingly the type system forces this as part of the type!
+
+Also it is interesting that it is explicitly stated
+
 *)
 
 vtypedef cloptr 
@@ -147,9 +152,16 @@ vtypedef cloptr
   (((&env,a) -> b, env) @ l | ptr l) 
 
 // Apply a value to a closure pointer
-extern
+
 fun 
   {a: t@ype} {b: t@ype} 
   cloptr_app {l: addr}
-  ( pclo: !cloptr(a,b,l) , x: a): b 
-
+  (pclo : !cloptr (a,b,l) , x: a): b = let
+  val p = pclo.1 // Taking the address out
+             
+  val  res = !p.0      //f(&env,a) → b 
+              (!p.1,x) // (&env,a)
+  in res end
+  
+// TODO implement cloptr example
+val example_using_cloptr = ()
