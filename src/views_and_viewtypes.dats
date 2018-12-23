@@ -165,3 +165,50 @@ fun
   
 // TODO implement cloptr example
 val example_using_cloptr = ()
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ---------------------------------------------------
+
+(* LEFT Values and Call by Reference *)
+
+// --------------------------------------------------
+
+
+
+
+
+
+
+(*
+
+In ATS, the simplest expression representing a left-value 
+is !p, where ! is a special symbol and p a value of the 
+type ptr(L) for some address L. When this expression is 
+typechecked, a proof of T@L for some type T is required 
+to be found among the currently available proofs.
+
+The default strategy for passing a function argument in ATS 
+is call-by-value. However, it is also allowed in ATS to specify 
+that call-by-reference is chosen for passing a particular 
+function argument. By call-by-reference, it is meant that 
+the argument to be passed must be a left-value and what is 
+actually passed is the address of the left-value 
+(instead of the value stored at the address). 
+For example, the following defined function swap2 
+makes essential use of call-by-reference: 
+*)
+
+extern
+fn {a : t@ype} 
+swap2 (x1: &a ,  x2: &a) : void
