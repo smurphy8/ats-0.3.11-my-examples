@@ -130,4 +130,26 @@ fn getInc {l:addr} {n:nat} (counter: !tptr(int(n),l)  >> tptr(int(n+1),l)):int(n
   in n end
 
 
-  
+(*  Crazy Closure function in ATS book 
+
+We are going to pair a function which takes an enviornment and a variable
+\(env, a) -> b with an environment env 
+Then store it all in a pointer p.
+
+This is an implmentation of a pointer to a closure.
+thus cloptr = closure-pointer
+
+*)
+
+vtypedef cloptr 
+  (a:t@ype, b:t@ype, l:addr) = 
+  [env:t@ype]  // ∃ env of t@ype
+  (((&env,a) -> b, env) @ l | ptr l) 
+
+// Apply a value to a closure pointer
+extern
+fun 
+  {a: t@ype} {b: t@ype} 
+  cloptr_app {l: addr}
+  ( pclo: !cloptr(a,b,l) , x: a): b 
+
