@@ -209,6 +209,14 @@ For example, the following defined function swap2
 makes essential use of call-by-reference: 
 *)
 
-extern
+
 fn {a : t@ype} 
-swap2 (x1: &a ,  x2: &a) : void
+swap2 (x1: &a ,  x2: &a) : void = let
+  val tmp = x1 in x1 := x2; x2 := tmp end
+  
+  
+// Swap1 implemented as swap2
+
+fn { a: t@ype}
+swap1 {l1,l2: addr}
+  (pf1: !a @ l1 , pf2: !a @ l2 |   p1: ptr l1 , p2:ptr l2) : void  = swap2(!p1,!p2)
