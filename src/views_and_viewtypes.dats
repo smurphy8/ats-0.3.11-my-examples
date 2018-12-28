@@ -293,4 +293,12 @@ fn fact {n:nat}
    var res: int with pf = 1
    val () = loop(pf|n, addr@res)
    in res end
-   
+
+
+val example_dotProd = let
+  var A = @[double][3](1.0) // [1,1,1]
+  var B = @[double][3](1.0,2.0,3.0) //[1.0,2.0,3.0]
+  
+  val () = println! ("a * b = ", dotprod (A,B))
+  in 
+  end   
