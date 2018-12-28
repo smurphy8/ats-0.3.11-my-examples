@@ -207,7 +207,12 @@ actually passed is the address of the left-value
 (instead of the value stored at the address). 
 For example, the following defined function swap2 
 makes essential use of call-by-reference: 
+
+The '&' means implement using call by reference
+
+
 *)
+
 
 
 fn {a : t@ype} 
@@ -216,7 +221,76 @@ swap2 (x1: &a ,  x2: &a) : void = let
   
   
 // Swap1 implemented as swap2
-
+(* Though the syntax seems confusing to me,the parameters being passed are the addresses of the pointers
+rather than the locations the pointers point to in the call to swap2 *)
 fn { a: t@ype}
 swap1 {l1,l2: addr}
   (pf1: !a @ l1 , pf2: !a @ l2 |   p1: ptr l1 , p2:ptr l2) : void  = swap2(!p1,!p2)
+  
+
+
+
+(*
+dotproduct:
+
+Given a type T and an integer N, the syntax @[T][N] stands for a flat array consisting N elements of the type T.
+Please note that a value of the type @[T][N] is of the size N*sizeof(T).  If a function has a parameter representing an array then this 
+parameter is most likely call by reference.  For instance, the following code implements a function that takes two arrays of doubles
+to compute their dot product 
+*)
+
+fun dotprod ( A: &(@[double][3])
+            , B: &(@[double][3])):double = 
+  (
+    A[0] * B[0] + A[1] * B[1] + A[2] * B[2]
+  )           
+  
+
+
+(* Stack-Allocated Variables
+   Given a type T and an address L how do I get a *)
+
+
+fn foo (): void = let
+  var x0:int 
+  val () = x0 := 0
+  var x1: int = 1
+  
+  var y:int with pfy
+  val () = y := 2
+  var z: int with pfz = 3 // pfz is an alias of view@(z): int(3) @ z
+  in end
+  
+
+
+  
+(*
+The keyword var is for declaring a local variable.
+When a variable is declared, either its type or its initial value needs to be given. 
+
+If a variable is declared without a type, then the type of its initial value 
+is assumed to be its type.
+
+Assume that a variable x is declared of type T.  Then the pointer to the location of the 
+variable is denoted by addr@(x), where addr@ is a keyword, and its associated linear proof 
+(of some at-view) can be referred to as view@(x), where view@ is a keyword.  
+
+A variable is another form of left-value in ATS.  In the body of foo, x0 is declared to be a 
+variable of type int and then is initialized with the integer 0.
+
+x1 is declared to be a variable of the type int that is given the initial value 1;
+
+y is declared to be a variable of type int while pfy is introduced as an alias for view@(y)
+*)
+
+fn fact {n:nat}
+  (n: int(n)):int = let
+  fun loop{n:nat}{l:addr} .<n>.
+   (pf: !int @ l | n: int n, res: ptr l): void = 
+     if n > 0 then let
+       val () = !res := n * !res in loop(pf | n-1, res)
+     end
+   var res: int with pf = 1
+   val () = loop(pf|n, addr@res)
+   in res end
+   
