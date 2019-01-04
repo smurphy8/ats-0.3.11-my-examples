@@ -15,7 +15,6 @@ val truncDec : double = 1.
 val sciNot : double = 1e-3
 val negDouble : double = ~1.0 
 
-// TODO How to cast
 
 // Bools 
 
