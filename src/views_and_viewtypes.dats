@@ -90,7 +90,7 @@ ptr_swap0 {l1,l2 : addr} ( pf1: a@l1   , pf2:a@l2
                           
 
                          
-// TODO implement swap 1
+
 
 // get1 first
 // demonstrating use of >> operator which says a proof is transformed
