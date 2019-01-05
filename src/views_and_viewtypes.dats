@@ -157,14 +157,18 @@ fun
   {a: t@ype} {b: t@ype} 
   cloptr_app {l: addr}
   (pclo : !cloptr (a,b,l) , x: a): b = let
-  val p = pclo.1 // Taking the address out
-             
+  val p = pclo.1 // Taking the address out             
   val  res = !p.0      //f(&env,a) → b 
               (!p.1,x) // (&env,a)
   in res end
+
   
 // TODO implement cloptr example
-val example_using_cloptr = ()
+//  Running into problems with understanding function
+// templates in ats. 
+
+// TODO learn about function templates
+
 
 
 
