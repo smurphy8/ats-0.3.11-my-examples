@@ -13,6 +13,8 @@
 #include "./views_and_viewtypes.dats"
 #include "./sorts.dats"
 #include "./bit-manip.dats"
+#include "./function_templates.dats"
+
 
 val _ = println!("Hello, World!")
 implement main0 () = ()
