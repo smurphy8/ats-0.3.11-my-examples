@@ -34,3 +34,7 @@ fun {a,b:t@ype} swap (xy: (a,b)):(b,a) = ( xy.1, xy.0)
 *)
 
 fun swap_int_char(xy:(int,char)) = swap<int,char>(xy)
+
+(* Perhaps we want to give parameters sequentially instead of simultaneously *)
+
+fun {a:t@ype}{b:t@ype} swap2(xy:(a,b)):(b,a) = ( xy.1, xy.0)
