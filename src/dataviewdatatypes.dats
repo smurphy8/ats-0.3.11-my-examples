@@ -7,11 +7,10 @@ A dataviewtype can be thought of as a linear version of datatype. To a large ext
 
 *)
 #include "share/atspre_staload.hats"
-staload UN  = "prelude/SATS/unsafe.sats"
-staload _  = "prelude/DATS/unsafe.dats"
 
 
 datavtype option_vt (a:t@ype+ , bool) = 
   | Some_vt (a,true) of a 
   | None_vt (a,false) of () 
+
   
