@@ -11,4 +11,7 @@ staload UN  = "prelude/SATS/unsafe.sats"
 staload _  = "prelude/DATS/unsafe.dats"
 
 
-// TODO implement data-view
+datavtype option_vt (a:t@ype+ , bool) = 
+  | Some_vt (a,true) of a 
+  | None_vt (a,false) of () 
+  
