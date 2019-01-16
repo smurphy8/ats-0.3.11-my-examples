@@ -14,7 +14,9 @@
 #include "./sorts.dats"
 #include "./bit-manip.dats"
 #include "./function_templates.dats"
+#include "./dataviews.dats"
 #include "./dataviewdatatypes.dats"
+
 
 val _ = println!("Hello, World!")
 implement main0 () = ()
