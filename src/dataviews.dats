@@ -1,12 +1,39 @@
 #include "share/atspre_staload.hats"
 
 
+
+(* --------------------------------------------------
+Optional Views
+-------------------------------------------------- *)
 dataview option_v (v:view+,bool) = 
   | Some_v (v,true) of (v) 
   | None_v (v,false) of () 
 
 
+
+
+// TODO implement ptr_alloc_opt (don't trust unimplemented ATS!)
 extern
 fun {a:t@ype} 
   ptr_alloc_opt () : [l:addr] (option_v (a? @l, l > null) | ptr l)
-// TODO implement dataview dataprops stuff from Ch14 
+
+
+
+
+(* --------------------------------------------------
+Disjunctive Views
+-------------------------------------------------- *)
+
+
+dataview VOR (v0:view, v1:view, int) = 
+  |VORLeft (v0,v1,0) | VORRight (v0,v1,1)
+
+
+
+(* getopt, get an optionally assigned value *)
+extern 
+fun 
+  {a:t@ype}
+  getopt {l:addr} 
+  (pf : a? @ l  | ptr(l)): [i:int] (VOR (a? @ l, a @ l, i) | int(i))
+
