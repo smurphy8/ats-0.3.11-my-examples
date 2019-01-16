@@ -25,7 +25,7 @@ Disjunctive Views
 -------------------------------------------------- *)
 
 
-dataview VOR (v0:view, v1:view, int) = 
+dataview VOR (v0:view+, v1:view+, int) = 
   |VORLeft (v0,v1,0) | VORRight (v0,v1,1)
 
 
@@ -37,3 +37,35 @@ fun
   getopt {l:addr} 
   (pf : a? @ l  | ptr(l)): [i:int] (VOR (a? @ l, a @ l, i) | int(i))
 
+
+
+// TODO get example of getopt working ch 14 
+
+(* an example usage of getopt
+   remember view@ and addr@ split a viewtype into its proof and its pointer
+*) 
+
+(*
+
+fun 
+  {a:t@ype}
+  foo {l:addr} () : void = let 
+    var x : a? @l 
+    val (pfor | i) = getopt<a>  (view@(x) | addr@(x))
+    in
+      if i = 0
+      then let 
+        prval VORLeft (pf0) = pfor in view@(x) := pf0      
+      end 
+      else let 
+        prval VORRight (pf1) = pfor in view@(x) := pf1
+      end
+   end   
+        
+*)
+
+(* fun {a:t@ype} foo {l:addr} () : void  *)
+
+
+     
+     
