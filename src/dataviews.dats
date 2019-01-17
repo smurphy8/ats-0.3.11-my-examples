@@ -30,31 +30,3 @@ dataview VOR (v0:view+, v1:view+, int) =
   | VORRight (v0,v1,1)
 
 
-
-(* getopt, get an optionally assigned value *)
-extern 
-fun 
-  {a:t@ype}
-  getopt {l:addr} 
-  (pf : a? @ l  | ptr(l)): [i:int] (VOR (a? @ l, a @ l, i) | int(i))
-
-
-
-// TODO get example of getopt working ch 14 
-
-(* an example usage of getopt
-   remember view@ and addr@ split a viewtype into its proof and its pointer
-*) 
-
-
-fun 
-  {a:t@ype}
-  foo {l:addr} () : void = let 
-    var x : a? @l 
-
-//    val (pfor | i) = getopt<a> ( view@(x) | addr@(x))
-    in
-    ()
-    end   
-        
-
