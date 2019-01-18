@@ -30,3 +30,7 @@ dataview VOR (v0:view+, v1:view+, int) =
   | VORRight (v0,v1,1)
 
 
+(* Data view for linear arrays
+*)
+
+// dataview 
