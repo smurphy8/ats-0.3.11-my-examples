@@ -47,5 +47,40 @@ timer_struct = @{
    started= bool // the timer has started
  , running= bool // the timer is running
  , ntick_beg= uint //last on
- , ntick_cc= uint //number of ticks accumulated
+ , ntick_acc= uint //number of ticks accumulated
  }
+ 
+
+(*
+The following linear datatype timer is declared for timers, 
+and the abstract type timer_vtype is assumed to equal timer:  *)
+
+datavtype timer = 
+  TIMER of (timer_struct) 
+
+
+(* In order to construct values of an abstract type, we need to concretize it temporarily by using the following form of declaration: 
+*)  
+assume timer_vtype = timer  
+
+
+
+
+implement
+timer_new () = let
+//
+val timer = TIMER (_)
+val TIMER (x) = timer
+//
+val () = x.started := false
+val () = x.running := false
+val () = x.ntick_beg := 0u
+val () = x.ntick_acc := 0u
+//
+(*  The special proof function fold@ is called on timer to fold it plus the proofs of at-views 
+attached to L1 and L2 into a linear list.  *)
+prval () = fold@ (timer)
+//
+in
+  timer
+end // end of [timer_new]
