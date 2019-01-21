@@ -32,12 +32,23 @@ the dynamic it does make sense to internalize them.
 *)
 vtypedef Option_vt (a:t@ype) = [b:bool] option_vt(a,b)
 
-fun {a:t@ype}
-find_rightmost
-  {n:nat} .<n>.
-(
-  xs: list (a, n), P: (a) -<cloref1> bool
-) : Option_vt(a)  = case+ xs of 
-  | list_cons(x,xs) => None_vt () (* end of [find_rightmost] *)
-  | list_nil() => None_vt ()
+
+(* Another reminder, -<cloref1> denotes that P is a closure function 
+who would normally be written (\a -> bool)
+*)
+
+
+// TODO working on this
+
+(* fun {a:t@ype} *)
+(* find_rightmost *)
+(*   {n:nat} .<n>. *)
+(* ( *)
+(*   xs: list (a, n), P: (a) -<cloref1> bool *)
+(* ) : Option_vt(a)  = case+ xs of  *)
+(*   | list_cons(x,xs) => let *)
+(*       val opt = find_rightmost(xs,P) *)
+(*       in case opt of  *)
+(*         | ~None_vt () => if P(x) then Some_vt(x *)
+(*   | list_nil() => None_vt () *)
   
