@@ -84,3 +84,5 @@ prval () = fold@ (timer)
 in
   timer
 end // end of [timer_new]
+
+// TODO implement the rest of the abstract view type example
