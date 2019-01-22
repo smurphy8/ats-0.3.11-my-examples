@@ -3,8 +3,23 @@
 
 staload "libats/SATS/bitvec.sats"
 
-staload 
-BV = "libats/SATS/bitvec.sats"
+staload _(*anon*) = "libats/DATS/bitvec.dats"
+
+
+
+(* A quick example of accessing and using a bit vector *)
+
+
+val _ = let
+#define nbit 16
+val out = stdout_ref
+val bvp1 = bitvecptr_make_full (nbit)
+val () = fprint (out, "bvp1 = ")
+val () = fprint_bitvecptr (out, bvp1, nbit)
+val () = fprint (out, "\n")
+val () = bitvecptr_free (bvp1) 
+
+in end
 
 // sortdef iovec = {b0:int | b0 <2} {b1:int | b1 <2}
 
@@ -165,5 +180,3 @@ datavtype is_writeable_ptr(i:int,l:addr,bool) =
 
 vtypedef IsWriteable(i:int,t:bool) = [l:addr] is_writeable_ptr(i,l,t)
 
-
-// TODO instead of using bitvec, I need my own because it is being a punk  
