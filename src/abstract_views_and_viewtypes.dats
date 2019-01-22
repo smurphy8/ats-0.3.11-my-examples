@@ -77,8 +77,7 @@ val () = x.running := false
 val () = x.ntick_beg := 0u
 val () = x.ntick_acc := 0u
 //
-(*  The special proof function fold@ is called on timer to fold it plus the proofs of at-views 
-attached to L1 and L2 into a linear list.  *)
+(*  The special proof function fold@ is called on timer to fold it plus the proofs of at-views *)
 prval () = fold@ (timer)
 //
 in

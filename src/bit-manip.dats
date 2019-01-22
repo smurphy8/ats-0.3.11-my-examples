@@ -117,7 +117,7 @@ fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteableDummy(i,j,w) | b:int(
 
 
 (* Obviously this isn't really doing anything *)
-fn writeBitVectorWithProof {i,j:int} (pf:IsWriteableDummy(i,j,true) | b:int(j)) : void =  ()
+fn writeBitVectorWithProofDummy {i,j:int} (pf:IsWriteableDummy(i,j,true) | b:int(j)) : void =  ()
   
 
   
@@ -126,7 +126,7 @@ val _ = let
             val i         = 2
             val (pf  | _) = getBitVectorDummy(i) 
             val (pfW | _) = setBitVectorWithProof(pf|i)            
-        in writeBitVectorWithProof(pfW|i)
+        in writeBitVectorWithProofDummy(pfW|i)
         end
   
 
@@ -158,9 +158,12 @@ isSet(0,DDRB) Should be true
  
 *)
 
-dataview is_writeable(v:view+,bool) = 
-  | Writeable (v,true) of (v)
-  | NotWriteable (v,false) of (v)
+datavtype is_writeable(i:int,l:addr,bool) = 
+  | Writeable (i,l,true) of (bitvecptr(l,16))
+  | NotWriteable (i,l,false) of (bitvecptr(l,16))
 
 
 // TODO need to learn about abstract v-type to more efficiently write this stuff
+
+
+
