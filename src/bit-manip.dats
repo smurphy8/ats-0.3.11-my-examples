@@ -3,6 +3,8 @@
 
 staload "libats/SATS/bitvec.sats"
 
+staload 
+BV = "libats/SATS/bitvec.sats"
 
 // sortdef iovec = {b0:int | b0 <2} {b1:int | b1 <2}
 
@@ -101,8 +103,7 @@ fn getBitVectorDummy {i,j:int}  (bv:int(j)) : [b:bool] (IsWriteableDummy(i,j,b) 
 
  
 (* This function contains a lot of important ideas
-   First, you can use sif to directly manipulate a static term (w in this case)
-   Also, there is a proof term we wrote by hand (IsWriteableDummy)
+there is a proof term we wrote by hand (IsWriteableDummy)
 *)
 fn setBitVectorWithProof {i,j:int} {w:bool} (pf:IsWriteableDummy(i,j,w) | b:int(j)) : 
    [t:bool | t== true] (IsWriteableDummy(i,j,t) | void)  = 
@@ -158,12 +159,11 @@ isSet(0,DDRB) Should be true
  
 *)
 
-datavtype is_writeable(i:int,l:addr,bool) = 
+datavtype is_writeable_ptr(i:int,l:addr,bool) = 
   | Writeable (i,l,true) of (bitvecptr(l,16))
   | NotWriteable (i,l,false) of (bitvecptr(l,16))
 
-
-// TODO need to learn about abstract v-type to more efficiently write this stuff
-
+vtypedef IsWriteable(i:int,t:bool) = [l:addr] is_writeable_ptr(i,l,t)
 
 
+// TODO instead of using bitvec, I need my own because it is being a punk  
