@@ -4,13 +4,21 @@
 staload "libats/SATS/bitvec.sats"
 
 staload _(*anon*) = "libats/DATS/bitvec.dats"
+staload BV(*anon*) = "libats/DATS/bitvec.dats"
 
 
+(* 
 
-(* A quick example of accessing and using a bit vector *)
+A quick example of accessing and using a bit vector 
+
+https://github.com/githwxi/ATS-Postiats/blob/master/doc/EXAMPLE/ATSLIB/libats_bitvec.dats
+
+*)
 
 
 val _ = let
+
+// Simple bind and free
 #define nbit 16
 val out = stdout_ref
 val bvp1 = bitvecptr_make_full (nbit)
@@ -18,6 +26,7 @@ val () = fprint (out, "bvp1 = ")
 val () = fprint_bitvecptr (out, bvp1, nbit)
 val () = fprint (out, "\n")
 val () = bitvecptr_free (bvp1) 
+
 
 in end
 
